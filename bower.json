@@ -1,0 +1,21 @@
+{
+  "name": "hive",
+  "version": "0.3.0",
+  "description": "Simple app framework for the browser",
+  "authors": [
+    "tunderdomb <tunderdomb@gmail.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "node_modules",
+    "src",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
