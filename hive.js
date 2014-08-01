@@ -828,6 +828,10 @@ RoleDefinition.prototype = {
       return this.renderSubRole(subElement, parentRole, appRole)
     }, this)
   },
+  /**
+   * Render app-specific role attached roles
+   * like "paren:subRole generalGlobalRole"
+   * */
   renderGlobalRoles: function ( element, hostRole, parentRole, appRole ){
     var definer = this
     this.globalRoles.forEach(function ( globalDefiner ){
@@ -837,13 +841,15 @@ RoleDefinition.prototype = {
       definer.app.setupOrder.push([globalDefiner, hostRole, parentRole, appRole])
     })
   },
+  /**
+   * Render non-app attached roles automatically at the end of setup
+   * */
   renderAutoRoles: function( appElement, appRole ){
     util.findAny(appElement).forEach(function( el ){
       if( ~el.getAttribute("role").indexOf(":") ) return
       util.all(el).forEach(function( roleName ){
         if( !globalRoles.exists(roleName) ) return
-        debugger
-        globalRoles.get(roleName).create(el, appRole)
+        globalRoles.get(roleName).create(el, null, appRole)
       })
     })
   },
