@@ -780,6 +780,7 @@ RoleDefinition.prototype = {
 
     if ( !this.parent ) {
       this.callDefinitions()
+      this.renderAutoRoles(element, appRole)
     }
 
     return role
@@ -834,6 +835,16 @@ RoleDefinition.prototype = {
       globalDefiner.renderSubRoles(element, hostRole, appRole)
       definer.app.setupOrder = definer.app.setupOrder.concat(globalDefiner.setupOrder)
       definer.app.setupOrder.push([globalDefiner, hostRole, parentRole, appRole])
+    })
+  },
+  renderAutoRoles: function( appElement, appRole ){
+    util.findAny(appElement).forEach(function( el ){
+      if( ~el.getAttribute("role").indexOf(":") ) return
+      util.all(el).forEach(function( roleName ){
+        if( !globalRoles.exists(roleName) ) return
+        debugger
+        globalRoles.get(roleName).create(el, appRole)
+      })
     })
   },
   attachDataSets: function ( role ){

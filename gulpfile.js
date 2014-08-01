@@ -4,9 +4,7 @@ var gulp = require('gulp')
 
 gulp.task("browserify", function(  ){
   gulp.src(["src/index.js"])
-    .pipe(browserify({
-
-    }))
+    .pipe(browserify({}))
     .pipe(concat("hive.js"))
     .pipe(gulp.dest(process.cwd()))
 })
